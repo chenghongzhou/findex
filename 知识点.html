@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="mian.css">
+		<style type="text/css">
+			li{
+				font-size: 16px;
+				color: #333;
+				line-height: 30px;
+			}
+			span{
+				margin-left: 20px;
+				display: block;
+				color: #666;
+			}
+			font{
+				margin-left: 30px;
+				display: block;
+				color: #666;				
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" style="width: 600px;height: 300px;"></canvas>
+		<canvas id="canvas1" style="width: 600px;height: 300px;"></canvas>
+		<h2>矩形</h2>
+		<ul>
+			<li>
+				var context=canvas.getContext('2d');  获取context对象的方法 
+					<span>context 是一个封装了很多绘画功能的对象.</span>
+			</li>
+			<li>
+				canvas绘制图像方法有2种及对应的样式设置
+					<span>1.context.fill()  填充。context.fillStyle(样式设置),默然是黑色</span>
+					<span>2.context.stroke  绘制边框。context.stroke(样式设置),默然是黑色</span>
+						<font style="color: red;">设置样式（颜色）一定是在绘制图形的前面设置</font>
+			</li>
+			<li>context.lineWidth,图形边框宽度</li>
+			<li>
+				绘制矩形
+					<span>context.fillRect(x,y,width,height) strokeRect(x,y,width,height)</span>
+						<font>x：矩形的原始横坐标。（canvas的左上角）</font>
+						<font>y：矩形的原始纵坐标。（canvas的左上角）</font>
+						<font>width,height:宽高</font>
+			</li>
+			<li>画布的大小默认是300*150，重新设置后在画布上绘制时大小会按默认画布的大小比例缩放</li>
+			<li>清除矩形区域:context.clearRect(x,y,width,height)</li>
+		</ul>
+		<!--圆弧-->
+		<canvas id="canvas2" style="width: 600px;height: 300px;"></canvas>
+		<canvas id="canvas3" style="width: 600px;height: 300px;"></canvas>
+		<h3>圆弧</h3>
+		<ul>
+			<li>
+				context.arc(x,y,radius,starAngle,endAngle,anticlockwise)
+					<span>x,y:圆弧的原点</span>
+					<span>starAngle,endAngle:圆弧的开始，结束角度</span>
+					<span>anticlockwise:圆弧的顺逆时针。（true:逆。false:顺。）</span>
+					<span>beginPath(开路路经),closePath（闭路路径：如果不闭会一直执行下去，当然也可以不闭有其他意想不到的效果）:</span>
+			</li>
+		</ul>
+		<!--绘制线段-->
+		<h3>绘制线段</h3>
+		<canvas id="canvas4"></canvas>
+		<ul>
+			<li>
+				context.moveTo(x,y) context.lineTo(x,y)
+				<span>x,y:x,y坐标</span>
+				<span>每次都是从moveTo到lineTo</span>
+			</li>
+			<li>貌似只用context.stroke()</li>
+		</ul>
+		
+		<!--贝塞尔曲线-->
+		<canvas id="canvas5"></canvas>
+		<h3>绘制贝塞尔曲线</h3>
+		<ul>
+			<li>context.bezierCurTo(cp1x,cp1y,cp2x,cp2y,x,y)
+				<span>cp1x,cp1y:第一个控制点x,y的坐标</span>
+				<span>cp2x,cp2y:第二个控制点x,y的坐标</span>
+				<span>x,y:终点x,y的坐标</span>
+			</li>
+			<li>
+				context.quadraticCurTo(qcpx,qcpy,qx,qy)
+					<span>qcpx,qcpy:二次样条曲线控制点x,y的坐标</span>
+					<span>qx,qy:二次样条曲线控制点终点x,y的坐标</span>
+			</li>
+		</ul>
+		
+		<!--线性渐变-->
+		<canvas id="canvas6"></canvas>
+		<h3>线性渐变</h3>
+		<ul>
+			<li>
+				var lg=context.createLinearGradient(xStart,yStart,xEnd,yEnd)
+					<span>xStart,yStart:渐变开始的x,y坐标</span>
+					<span>xEnd,yEnd:渐变结束的x,y的坐标</span>
+			</li>
+			<li>
+				线性渐变 颜色 lg.addColorStop(offset,color)
+					<span>offset:设置颜色离渐变结束点的偏移量</span>
+					<span>绘制要使用的颜色</span>
+			</li>
+		</ul>
+		
+		
+		
+		
+	</body>
+	<script type="text/javascript">
+		window.onload=function(){
+			function draw(id){//矩形
+				var canvas=document.getElementById(id);
+				if(canvas==null){
+					return false;
+				};
+				var context=canvas.getContext('2d');
+				context.fillRect(0,0,50,50);//默认是heise
+				context.strokeRect(60,0,50,50);//默认是heise
+				
+				//加颜色
+				context.fillStyle='gray';
+				context.strokeStyle='red';
+				context.fillRect(120,0,50,50);
+				context.strokeRect(180,0,50,50);
+				
+				//透明背景
+				context.fillStyle='rgba(225,0,0,0.2)';
+				context.fillRect(0,60,50,50)
+				context.strokeStyle='rgba(225,0,0,0.2)';
+				context.strokeRect(60,60,50,50);
+			}
+			
+			function draw1(id){//清除矩形
+				var canvas=document.getElementById(id);
+				if(canvas==null){
+					return false;
+				};
+				var context=canvas.getContext('2d');
+				context.fillRect(0,0,50,50);//默认是heise
+				context.strokeRect(60,0,50,50);//默认是heise
+				
+				//加颜色
+				context.fillStyle='gray';
+				context.strokeStyle='red';
+				context.fillRect(120,0,50,50);
+				context.strokeRect(180,0,50,50);
+				
+				//透明背景
+				context.fillStyle='rgba(225,0,0,0.2)';
+				context.fillRect(0,60,50,50)
+				context.strokeStyle='rgba(225,0,0,0.2)';
+				context.strokeRect(60,60,50,50);
+				context.clearRect(20,20,80,80)//清楚矩形
+			}		
+			
+			//圆弧
+			function draw2(id){
+				var canvas=document.getElementById(id);
+				if(canvas==null){
+					return false;
+				};
+				var context=canvas.getContext('2d');
+				context.beginPath();
+				context.arc(50,75,50,0,Math.PI*2,true);
+				context.closePath();
+				context.fillStyle="aquamarine";
+				context.fill();		
+				
+			}
+			function draw3(id){
+				var canvas=document.getElementById(id);
+				if(canvas==null){
+					return false;
+				};
+				var context=canvas.getContext('2d');
+				
+				context.beginPath();
+				context.arc(100,75,50,0,Math.PI/2,false);
+				//context.closePath();
+				context.fillStyle="red";
+				context.fill();	
+				context.strokeStyle="aquamarine";
+				//context.closePath();
+				context.stroke();
+
+				//context.beginPath();
+				context.arc(150,75,50,0,Math.PI/2,false);
+				//context.closePath();
+				context.fillStyle="red";
+				context.fill();	
+				context.strokeStyle="aquamarine";
+				context.closePath();
+				context.stroke();
+				
+			}			
+			
+			//绘制线段
+			function draw4(id){
+				var canvas=document.getElementById(id);
+				if(canvas==null){
+					return false;
+				};
+				var context=canvas.getContext('2d');
+				//context.fillStyle="#333333";
+				context.strokeStyle="red";
+				context.moveTo(0,0);
+				context.lineTo(300,0);
+				context.lineTo(150,150);
+				context.lineTo(0,0)
+				//context.fill();
+				context.stroke()
+			}
+			//贝塞尔曲线
+			function draw5(id){
+				var canvas=document.getElementById(id);
+				if(canvas==null){
+					return false;
+				};
+				var context=canvas.getContext('2d');
+				context.moveTo(0,0);
+				context.bezierCurveTo(0,0,50,0,50,50);
+				context.stroke();
+				context.quadraticCurveTo(50,100,100,100);
+				context.stroke();
+				
+				context.bezierCurveTo(100,100,150,100,150,150);
+				context.stroke();
+				context.quadraticCurveTo(150,100,200,100);
+				context.stroke();	
+				
+				context.moveTo(200,100)
+				context.bezierCurveTo(200,100,250,100,250,50)
+				context.stroke();
+				context.quadraticCurveTo(250,0,300,0);
+				context.stroke();
+
+			}
+			
+			//线性渐变
+			function draw6(id){
+				var canvas=document.getElementById(id);
+				if(canvas==null){
+					return false;
+				};
+				var context=canvas.getContext('2d');
+				
+				var lg=context.createLinearGradient(0,0,0,150);
+				lg.addColorStop(0,'red');
+				lg.addColorStop(0.5,'green');
+				lg.addColorStop(1,'blue');
+				
+				context.fillStyle=lg;
+				context.fillRect(0,0,300,150)
+			}
+			
+			draw('canvas');
+			draw1('canvas1');
+			draw2('canvas2');
+			draw3('canvas3');
+			draw4('canvas4');
+			draw5('canvas5');
+			draw6('canvas6')
+		}
+
+	</script>
+</html>

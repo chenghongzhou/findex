@@ -1,0 +1,135 @@
+@charset "UTF-8";
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+textarea,
+p,
+blockquote,
+th,
+td,
+span,i,a,
+img{
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-size: 12px;
+  font-family: "Microsoft YaHei", "微软雅黑", "Arial", "黑体", "宋体", sans-serif;
+  background: #fff;
+  overflow: hidden;
+}
+body,
+html {
+  height: 100%;
+  width: 100%;
+  min-width: 960px;
+}
+input{
+	border: 0px;
+	outline: none;
+}
+ul,
+li {
+  list-style: none;
+}
+fieldset,
+img,
+html,
+body,
+iframe {
+  border: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+em,
+strong,
+b,
+i {
+  font-style: normal;
+  font-size: 100%;
+  font-weight: normal;
+}
+input,
+textarea,
+a,
+button,
+select {
+  outline: none;
+  font-size: 12px;
+  border: 0;
+}
+input::-ms-clear,
+input::-ms-reveal {
+  display: none;
+}
+textarea {
+  overflow: auto;
+  resize: none;
+}
+textarea,
+input,
+button,
+select {
+  color: inherit;
+  font-family: "Microsoft YaHei", "微软雅黑", "Arial", "黑体", "宋体", sans-serif;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.clear {
+  clear: both;
+  display: block;
+}
+.hide {
+  display: none;
+}
+body {
+  -moz-user-select: none;
+  -o-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+a {
+  text-decoration: none;
+  outline: none;
+}
+/*禁止选中*/
+.noSel {
+  -moz-user-select: none;
+  -o-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/*自动省略号*/
+.tmui-ellipsis {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
