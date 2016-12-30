@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#left{
+				float: left;
+				background: url(img/1.jpg) no-repeat;
+				width: 300px;
+				height: 300px;
+				margin-left: 100px;
+				position: relative;
+				background-size: cover;
+			}
+			span{
+				width: 120px;
+				height: 120px;
+				background: rgba(0,0,255,0.5);
+				position: absolute;
+				top:0px;
+				left: 0px;
+				cursor: move;
+			}
+			#right{
+				width: 300px;
+				height: 300px;
+				float: left;
+				overflow: hidden;
+				display: none;
+				position: relative;
+				margin-left: 20px;
+			}
+			#right img{
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="left">
+			<span></span>
+		</div>
+		<div id="right"><img src="1.jpg" width="" height="" alt="" id="big"></div>
+	</body>
+	<script type="text/javascript">
+		window.onload=function(){
+			var oLeft=document.getElementById("left");
+			var oSpan=document.getElementsByTagName("span")[0];
+			var oRight=document.getElementById("right");
+			var oImg=document.getElementById("big");
+			
+			oLeft.onmouseenter=function(){
+				oSpan.style.display="block";
+				oRight.style.display="block";
+			};
+			
+			oLeft.onmouseleave=function(){
+				oSpan.style.display="none";
+				oRight.style.display="none";
+			};
+			
+			oLeft.onmousemove=function(e){
+				var event=e || window.event;
+				var l=event.clientX-this.offsetLeft-oSpan.offsetWidth/2;
+				var h=event.clientY-this.offsetTop-oSpan.offsetHeight/2;
+				
+				if(l<0){
+					l=0;
+				};
+				if(h<0){
+					h=0;
+				};
+				
+				if(l>(this.offsetWidth-oSpan.offsetWidth)){
+					l=this.offsetWidth-oSpan.offsetWidth;
+				};
+				if(h>(this.offsetHeight-oSpan.offsetHeight)){
+					h=this.offsetHeight-oSpan.offsetHeight;
+				};
+				//重新赋值
+				oSpan.style.left=l+"px";
+				oSpan.style.top=h+"px";
+				console.log(h)
+				
+				
+				var percX=l/(this.offsetWidth-oSpan.offsetWidth);
+				var percY=h/(this.offsetHeight-oSpan.offsetHeight);
+					
+				oImg.style.left=-percX*(oImg.offsetWidth-oRight.offsetWidth)+'px';
+				oImg.style.top=-percY*(oImg.offsetHeight-oRight.offsetHeight)+'px';
+			}
+		}
+	</script>
+</html>
